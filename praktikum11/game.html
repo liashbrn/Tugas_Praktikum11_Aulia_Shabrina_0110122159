@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game - Batu,Gunting dan Kertas</title>
+    <style>
+        *,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background: #333;
+    color: #fff;
+    font-family: "Fira Sans", sans-serif;
+    margin: 0;
+}
+
+#game {
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#opts {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+}
+
+a {
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a:hover {
+    color: #ccc;
+}
+
+i {
+    pointer-events: none;
+    touch-action: none;
+}
+
+#computer {
+    text-align: center;
+}
+    </style>
+  </head>
+
+  <body>
+    <div id="game">
+      <div id="opts">
+        <a title="Rock">
+          <i class="fas fa-hand-rock fa-2x fa-rotate-90" aria-hidden="true"></i>
+          Rock
+        </a>
+
+        <a title="Paper">
+          <i
+            class="fas fa-hand-paper fa-2x fa-rotate-90"
+            aria-hidden="true"
+          ></i>
+          Paper
+        </a>
+
+        <a title="Scissors">
+          <i
+            class="fas fa-hand-scissors fa-2x fa-flip-horizontal"
+            aria-hidden="true"
+          ></i>
+          Scissors
+        </a>
+      </div>
+
+      <div id="computer">
+        <p>
+          <b>Computer</b>:
+          <span id="result">None</span>
+        </p>
+      </div>
+    </div>
+    <script>
+        // menangkap semua elemen a
+document.querySelectorAll("#opts a").forEach((a) =>
+// jika di klik akan menjalankan fungsi computerChoice
+a.addEventListener("click",(element) =>{
+    computerChoice(element);
+})
+
+);
+
+function computerChoice(element){
+    //tangkap pilihan user
+    let pilihanUser = element.target.innerText;
+    // menangkap element result dengan menyelektor untuk menampung
+    // nilai hasil dari game
+    let pilihanComputer = document.querySelector("#result");
+    // membuat array pilihan untuk komputer
+    let choices = ["Rock", "Paper", "Scissors"];
+
+    //pilihan random untuk komputer
+    pilihanComputer.innerHTML = 
+    choices[Math.round(Math.random()* choices.length)];
+    pilihanComputer = pilihanComputer.innerHTML;
+
+    // jika pilihan komputer sama dengan pilihan user (draw)
+    if (pilihanUser == pilihanComputer){
+        alert("DRAW");
+    }
+
+    // jika pilih user yang menang
+    if(pilihanUser == "Rock" && pilihanComputer == "Scissors"){
+        alert("You Won");
+    } else if(pilihanUser == "Paper" && pilihanComputer == "Rock"){
+        alert("You Won");
+    } else if(pilihanUser == "Scissors" && pilihanComputer == "Paper"){
+        alert("You Won")
+    }
+
+      // jika pilih computer yang menang
+      if(pilihanUser == "Rock" && pilihanComputer == "Paper"){
+        alert("You Won");
+    } else if(pilihanUser == "Paper" && pilihanComputer == "Scissors"){
+        alert("You Won");
+    } else if(pilihanUser == "Scissors" && pilihanComputer == "Rock"){
+        alert("You Won")
+    }
+}
+    </script>
+  </body>
+</html>
